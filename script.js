@@ -48,10 +48,10 @@ function resetState() {
     }
 }
 
-(function)() {
-    var sec = 60
-    function startTimer() {
-        console.log('timer need to subtract')
+
+var sec = 60
+function startTimer() {
+    console.log('timer need to subtract')
     var timer = setInterval(function() {
         sec--;
         document.getElementById('timerDisplay').innerHTML='00:'+sec;
@@ -60,8 +60,8 @@ function resetState() {
             alert('Time is Up!')
         }
     }, 1000);
-    }
 }
+
 
 document.getElementById
 
@@ -95,11 +95,35 @@ function clearStatusClass(element) {
 }
 
 var questions = [
-    new questions("What is the command to start a new template in your Index?", ["Please", "!+Enter", "MDN Docs", "Ask Brad/Grady"], "!+Enter")
-    new questions("What does NOT go into your professionally-written README file?", ["Installation", "License", "Credits", "Pineapple Pizza"], "Pineapple Pizza")
-    new questions("In what type of file should you be able to commonly be able to change your styles of your page?", ["Index", "Javascript", "CSS", "README"], "CSS")
-    new questions("What GIT command allows you to pull documents from a subject repository?", ["git pull origin main", "git push origin main", "git add -A", "git help"], "git pull origin main")
-    new questions("In a number index in Javascript what position does the integer 0 hold?", ["0", "It doesn't", "1", "I don't understand the question"], "1")
+    {
+        questions: "What is the command to start a new template in your Index?",
+        answers: ["Please", "!+Enter", "MDN Docs", "Ask Brad/Grady"],
+        correct: "!+Enter"
+    },
+    
+    {
+        questions: "What does NOT go into your professionally-written README file?",
+        answers: ["Installation", "License", "Credits", "Pineapple Pizza"],
+        correct: "Pineapple Pizza"
+    },
+
+    {
+        questions: "In what type of file should you be able to commonly be able to change your styles of your page?",
+        answers: ["Index", "Javascript", "CSS", "README"],
+        correct: "CSS"
+    },
+
+    {
+        questions: "What GIT command allows you to pull documents from a subject repository?",
+        answers: ["git pull origin main", "git push origin main", "git add -A", "git help"],
+        correct: "git pull origin main"
+    },
+
+    {
+        questions: "In a number index in Javascript what position does the integer 0 hold?",
+        answers: ["0", "It doesn't", "1", "I don't understand the question"],
+        correct: "1"
+    }
 ];
 
 var quiz = new quiz(questions);
