@@ -7,7 +7,21 @@
     <link href="styles.css" rel="stylesheet">
     <title>Coding Quiz Challenge</title>
 </head>
+<!-- //Create container for info to be displayed for the quiz.  Score, timer, etc. -->
+<div class="info-container">
+    <div id="results" style="display: none;">
+        <h2>Time: 60</h2>
+        <h2>Results</h2>
+        <p>Your score: <span id="score"></span></p>
+        <label for="username">Your name:</label>
+        <input type="text" id="username">
+        <button id="submit">Submit</button>
+        <button id="restart">Restart</button>
+    </div>
+</div>
+<head>
 <body>
+<!-- //Create container to display contents for the questions and answers buttons. -->
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
@@ -23,9 +37,8 @@
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div> 
     </div>
-    <div id="Scores">
+    </div>   
         
-    </div>     
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,12 +1,17 @@
+// List variables to be used at top for easy reference.
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+const timerNumber = document.querySelector("#timer-number")
+const instructions = document.querySelector('.instructions')
+const questionContainer = document.querySelector('#question-container')
 
-let shuffledQuestions;
 let currentQuestionIndex = 0;
+let timer = 60;
 
+// Questions and answers for index using questions const.
 const questions = [
     {
         questions: "What is the command to start a new template in your Index?",
@@ -43,7 +48,8 @@ startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
-})
+});
+
 
 function startGame() {
     console.log('Started')
@@ -65,6 +71,14 @@ function showQuestion(questionIndex) {
         const button = document.createElement('button')
         button.innerText = answer
         button.classList.add('btn')
+        button.addEventListener('click', () => {
+            if (i === question.answer) {
+                correctAnswers++;
+            } else {
+                timer -= 10;
+            }
+            nextQuestion();
+        });
         if (answer.correct) {
             button.dataset.correct = answer.correct
         }
@@ -137,9 +151,6 @@ function clearStatusClass(element) {
     element.classList.remove('wrong')
 };
 
-const timerNumber = document.querySelector("#timer-number")
-const instructions = document.querySelector('.instructions')
-const questionContainer = document.querySelector('#question-container')
 
 
 
