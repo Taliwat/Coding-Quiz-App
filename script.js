@@ -1,45 +1,95 @@
-var startButton = document.getElementById('start-btn')
-var nextButton = document.getElementById('next-btn')
-var questionContainerElement = document.getElementById('questionContainer')
-var questionElement = document.getElementById('question')
-var answerButtonsElement = document.getElementById('answer-buttons')
+// List variables to be used at top for easy reference.
+const startButton = document.getElementById('start-btn')
+const nextButton = document.getElementById('next-btn')
+const questionContainerElement = document.getElementById('question-container')
+const questionElement = document.getElementById('question')
+const answerButtonsElement = document.getElementById('answer-buttons')
+const timerNumber = document.querySelector("#timer-number")
+const instructions = document.querySelector('.instructions')
+const questionContainer = document.querySelector('#question-container')
 
-let shuffledQuestions, currentQuestionIndex
+let currentQuestionIndex = 0;
 
+
+// Questions and answers for index using questions const.
+const questions = [
+    {
+        questions: "What is the command to start a new template in your Index?",
+        answers: ["Please", "!+Enter", "MDN Docs", "Ask Brad/Grady"],
+        correct: "!+Enter"
+    },
+    
+    {
+        questions: "What does NOT go into your professionally-written README file?",
+        answers: ["Installation", "License", "Credits", "Pineapple Pizza"],
+        correct: "Pineapple Pizza"
+    },
+
+    {
+        questions: "In what type of file should you be able to commonly be able to change your styles of your page?",
+        answers: ["Index", "Javascript", "CSS", "README"],
+        correct: "CSS"
+    },
+
+    {
+        questions: "What GIT command allows you to pull documents from a subject repository?",
+        answers: ["git pull origin main", "git push origin main", "git add -A", "git help"],
+        correct: "git pull origin main"
+    },
+
+    {
+        questions: "In a number index in Javascript what position does the integer 0 hold?",
+        answers: ["0", "It doesn't", "1", "I don't understand the question"],
+        correct: "1"
+    }
+];
+
+// Activate the start and next buttons in the quiz container.
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
-})
+});
+
 
 function startGame() {
     console.log('Started')
     startButton.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
 }
 
 function setNextQuestion () {
     resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
+    showQuestion(currentQuestionIndex)
 }
 
-function showQuestion(question) {
-    questionElement.innerText = question.question
-    question.answers.forEach(answer => {
+// Have it to where the questions cycle through and the timer ticks down, with reduction functionality.
+function showQuestion(questionIndex) {
+    questionElement.innerHTML = ""
+    answerButtonsElement.innerHTML = ""
+    questionElement.innerText = questions[questionIndex].questions
+    questions[questionIndex].answers.forEach(answer => {
         const button = document.createElement('button')
-        button.innerText = answer.text
+        button.innerText = answer
         button.classList.add('btn')
+        button.addEventListener('click', () => {
+            if (i === question.answer) {
+                correctAnswers++;
+            } else {
+                timer -= 10;
+            }
+            nextQuestion();
+        });
         if (answer.correct) {
             button.dataset.correct = answer.correct
         }
-        button.addEventListener('click', selectAnswer)
+        button.addEventListener('click', (selectAnswer))
         answerButtonsElement.appendChild(button)
     })
 }
 
+// Be able to reset the quiz when done.
 function resetState() {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
@@ -48,10 +98,10 @@ function resetState() {
     }
 }
 
-(function)() {
-    var sec = 60
-    function startTimer() {
-        console.log('timer need to subtract')
+// Write function for timer with console.log messages
+let timer = 60
+function startTimer() {
+    console.log('timer need to subtract')
     var timer = setInterval(function() {
         sec--;
         document.getElementById('timerDisplay').innerHTML='00:'+sec;
@@ -60,19 +110,31 @@ function resetState() {
             alert('Time is Up!')
         }
     }, 1000);
-    }
 }
 
-document.getElementById
-
-function selectAnswer(e) {
-    const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
+// Write function for events that happen when you select an answer.  Right/wrong, etc.
+function selectAnswer(event) {
+    const selectedButton = event.target.innerHTML
+    const correct = questions[currentQuestionIndex].correct
+    if(selectedButton === correct) {
+        console.log("correct")
+    } else {
+        console.log("wrong")
+    }
+    if (currentQuestionIndex < questions.length - 1) {
+        nextButton.classList.remove("hide");
+        currentQuestionIndex++ 
+        showQuestion(currentQuestionIndex)
+    } else {
+        startButton.innerText = "Restart";
+        startButton.classList.remove("hide");
+        questionContainerElement.innerHTML = ""
+        }
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    if (currentQuestionIndex < questions.length - 1) {
         nextButton.classList.remove('hide')    
     }   else {
         startButton.innerText = 'Restart'
@@ -92,15 +154,9 @@ function setStatusClass(element, correct) {
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
-}
+};
 
-var questions = [
-    new questions("What is the command to start a new template in your Index?", ["Please", "!+Enter", "MDN Docs", "Ask Brad/Grady"], "!+Enter")
-    new questions("What does NOT go into your professionally-written README file?", ["Installation", "License", "Credits", "Pineapple Pizza"], "Pineapple Pizza")
-    new questions("In what type of file should you be able to commonly be able to change your styles of your page?", ["Index", "Javascript", "CSS", "README"], "CSS")
-    new questions("What GIT command allows you to pull documents from a subject repository?", ["git pull origin main", "git push origin main", "git add -A", "git help"], "git pull origin main")
-    new questions("In a number index in Javascript what position does the integer 0 hold?", ["0", "It doesn't", "1", "I don't understand the question"], "1")
-];
 
-var quiz = new quiz(questions);
-populate
+
+
+

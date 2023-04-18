@@ -5,12 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet">
-    <script defer src="script.js"></script>
     <title>Coding Quiz Challenge</title>
 </head>
+<!-- //Create container for info to be displayed for the quiz.  Score, timer, etc. -->
+<div class="info-container">
+    <div id="results" style="display: none;">
+        <h2>Time: 60</h2>
+        <h2>Results</h2>
+        <p>Your score: <span id="score"></span></p>
+        <label for="username">Your name:</label>
+        <input type="text" id="username">
+        <button id="submit">Submit</button>
+        <button id="restart">Restart</button>
+    </div>
+</div>
+<head>
 <body>
-   <div class="container">
-     <div id="question-container" class="hide">
+<!-- //Create container to display contents for the questions and answers buttons. -->
+    <div class="container">
+        <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">
                 <button class="btn correct">Answer 1</button>
@@ -23,7 +36,10 @@
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div> 
-   </div>       
+    </div>
+    </div>   
+        
+    <script src="script.js"></script>
 </body>
 </html>
 
