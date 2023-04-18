@@ -9,7 +9,7 @@ const instructions = document.querySelector('.instructions')
 const questionContainer = document.querySelector('#question-container')
 
 let currentQuestionIndex = 0;
-let timer = 60;
+
 
 // Questions and answers for index using questions const.
 const questions = [
@@ -44,6 +44,7 @@ const questions = [
     }
 ];
 
+// Activate the start and next buttons in the quiz container.
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
@@ -63,6 +64,7 @@ function setNextQuestion () {
     showQuestion(currentQuestionIndex)
 }
 
+// Have it to where the questions cycle through and the timer ticks down, with reduction functionality.
 function showQuestion(questionIndex) {
     questionElement.innerHTML = ""
     answerButtonsElement.innerHTML = ""
@@ -87,6 +89,7 @@ function showQuestion(questionIndex) {
     })
 }
 
+// Be able to reset the quiz when done.
 function resetState() {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
@@ -95,7 +98,8 @@ function resetState() {
     }
 }
 
-let sec = 60
+// Write function for timer with console.log messages
+let timer = 60
 function startTimer() {
     console.log('timer need to subtract')
     var timer = setInterval(function() {
@@ -108,6 +112,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Write function for events that happen when you select an answer.  Right/wrong, etc.
 function selectAnswer(event) {
     const selectedButton = event.target.innerHTML
     const correct = questions[currentQuestionIndex].correct
